@@ -5,9 +5,9 @@
   <link rel="stylesheet" type="text/css" href="./style.css">
 
   <script src="./node_modules/angular/angular.js"></script>
-  <script src="./app.js"></script>
   <script src="./node_modules/angular-messages/angular-messages.js"></script>
   <script src="./node_modules/angular-locale-pt-br/angular-locale_pt-br.js"></script>
+  <script src="./app.js"></script>
   
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,7 +33,7 @@
           <td>{{contato.nome | uppercase}}</td>
           <td>{{contato.telefone}}</td>
           <td>{{contato.operadora.nome}}</td>
-          <td>{{contato.data | date:'dd/MM/yyyy HH:mm'}}</td>
+          <td>{{contato.data | date:'EEEE dd/MM/yyyy HH:mm'}}</td>
           <td><div class="contato" ng-style="{'background-color': contato.cor}"></div></td>
         </tr>
       </table>

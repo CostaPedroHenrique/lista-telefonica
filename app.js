@@ -7,7 +7,7 @@ app.controller("listaTelefonicaCtrl", function($scope){
     {nome: "Alex", telefone: "9999-9999", data: new Date(), cor:'gray', operadora: {nome: "Tim", codigo: 16}},
     {nome: "Artur", telefone: "9999-9999", data: new Date(), cor:'blue', operadora: {nome: "Tim", codigo: 16}}
   ];
-
+  
   $scope.operadoras = [
     {nome: "Oi", codigo: 14, preco: 2},
     {nome: "Vivo", codigo: 15, preco: 3},
