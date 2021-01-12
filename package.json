@@ -4,6 +4,7 @@
   "main": "index.js",
   "repository": "https://github.com/CostaPedroHenrique/lista-telefonica",
   "author": "CostaPedroHenrique <devpedrohenrique@gmail.com>",
+  "homepage": ".",
   "license": "MIT",
   "dependencies": {
     "angular": "1.7.9",
