@@ -1,0 +1,13 @@
+{
+  "name": "angular-teste",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/CostaPedroHenrique/lista-telefonica",
+  "author": "CostaPedroHenrique <devpedrohenrique@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "angular": "1.7.9",
+    "angular-locale-pt-br": "^1.3.16",
+    "angular-messages": "^1.8.2"
+  }
+}
