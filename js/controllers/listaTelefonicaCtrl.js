@@ -1,25 +1,24 @@
-var app = angular.module("listaTelefonica", ["ngMessages"]);
-
-app.controller("listaTelefonicaCtrl", function($scope, $http){
+app.controller("listaTelefonicaCtrl", function($scope, contatosAPI, operadorasAPI){
   $scope.app = "Lista Telefonica";
   $scope.contatos = [];
 
   var carregarContatos = function(){
-    $http.get("http://localhost:3333/contatos").then(function(data, status){
+    contatosAPI.getContatos().then(function(data, status){
       $scope.contatos = data.data;
+    }).catch((data, status)=>{
+      $scope.error = "Não foi possível carregar os contatos!"
     });
   };
   
   var carregarOperadoras = function(){
-    $http.get("http://localhost:3333/operadoras").then(function(data, status){
-      console.log(data)
+    operadorasAPI.getOperadoras().then((data, status)=>{
       $scope.operadoras = data.data;
     });
   };
   
   $scope.adicionarContato = function(contato){
     contato.data = new Date();
-    $http.post("http://localhost:3333/contatos", contato).then((data, status)=>{
+    contatosAPI.saveContato(contato).then((data, status)=>{
       delete $scope.contato;
       $scope.contatoForm.$setPristine();
       carregarContatos();
@@ -30,7 +29,7 @@ app.controller("listaTelefonicaCtrl", function($scope, $http){
   $scope.apagarSelecionado = function(contatos){
     $scope.contatos = contatos.filter(function(contato){
       if (contato.selecionado){
-        $http.delete("http://localhost:3333/contatos", contato).then((data, status)=>{
+        contatosAPI.deleteContato(contato).then((data, status)=>{
         carregarContatos();
     });
       }
