@@ -15,7 +15,7 @@
   
 </head>
 <body>
-  <div ng-controller="listaTelefonicaCtrl">
+  <div ng-controller="listaTelefonicaCtrl"> 
     <div class="jumbotron">
       <h3>{{app}}</h3>
       <input class="form-control" type="text" ng-model="criterioDeBusca" placeholder="O que você está buscando?">
@@ -45,7 +45,7 @@
         <select class="form-control" ng-model="contato.operadora" ng-required="true" ng-options="operadora.nome + ' ( '+ (operadora.preco | currency)  + ' )' for operadora in operadoras | orderBy:'nome'">
           <option value="" selected>Selecione uma operadora</option>
         </select>
-      </form>
+      </form> 
 
       <div ng-messages="contatoForm.nome.$error" class="alert alert-danger">
 

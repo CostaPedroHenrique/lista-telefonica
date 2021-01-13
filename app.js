@@ -1,29 +1,39 @@
 var app = angular.module("listaTelefonica", ["ngMessages"]);
-app.controller("listaTelefonicaCtrl", function($scope){
-  $scope.app = "Lista Telefonica";
-  $scope.contatos = [
-    {nome: "Pedro", telefone: "9999-9999", data: new Date(), cor:'blue', operadora: {nome: "Oi", codigo: 14}},
-    {nome: "Eduardo", telefone: "9999-9999", data: new Date(), cor:'red', operadora: {nome: "Claro", codigo: 17}},
-    {nome: "Alex", telefone: "9999-9999", data: new Date(), cor:'gray', operadora: {nome: "Tim", codigo: 16}},
-    {nome: "Artur", telefone: "9999-9999", data: new Date(), cor:'blue', operadora: {nome: "Tim", codigo: 16}}
-  ];
-  
-  $scope.operadoras = [
-    {nome: "Oi", codigo: 14, preco: 2},
-    {nome: "Vivo", codigo: 15, preco: 3},
-    {nome: "Tim", codigo: 16, preco: 1},
-    {nome: "Claro", codigo: 17, preco: 4}
-  ];
 
-  $scope.adicionarContato = function(contato){
-    $scope.contatos.push(angular.copy(contato));
-    delete $scope.contato;
-    $scope.contatoForm.$setPristine();
+app.controller("listaTelefonicaCtrl", function($scope, $http){
+  $scope.app = "Lista Telefonica";
+  $scope.contatos = [];
+
+  var carregarContatos = function(){
+    $http.get("http://localhost:3333/contatos").then(function(data, status){
+      $scope.contatos = data.data;
+    });
   };
+  
+  var carregarOperadoras = function(){
+    $http.get("http://localhost:3333/operadoras").then(function(data, status){
+      console.log(data)
+      $scope.operadoras = data.data;
+    });
+  };
+  
+  $scope.adicionarContato = function(contato){
+    contato.data = new Date();
+    $http.post("http://localhost:3333/contatos", contato).then((data, status)=>{
+      delete $scope.contato;
+      $scope.contatoForm.$setPristine();
+      carregarContatos();
+    });
+    
+  }; 
 
   $scope.apagarSelecionado = function(contatos){
     $scope.contatos = contatos.filter(function(contato){
-      if (!contato.selecionado) return contato;
+      if (contato.selecionado){
+        $http.delete("http://localhost:3333/contatos", contato).then((data, status)=>{
+        carregarContatos();
+    });
+      }
     });
 
   };
@@ -40,4 +50,7 @@ app.controller("listaTelefonicaCtrl", function($scope){
   };
 
   $scope.classe = "selecionado";
+
+  carregarContatos();
+  carregarOperadoras();
 });
